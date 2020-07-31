@@ -1,0 +1,14 @@
+{
+    "name": "fod/owner",
+    "description": "Backend PHP fod app",
+    "authors": [
+        {
+            "name": "raza11409652",
+            "email": "raza.11409652@lpu.in"
+        }
+    ],
+    "require": {
+        "kreait/firebase-php": "^4.41",
+        "razorpay/razorpay": "2.5"
+    }
+}

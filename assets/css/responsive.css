@@ -1,0 +1,72 @@
+@media(max-width:700px){
+    .payment-login-holder .login-card{
+        max-width: 100% !important;
+        min-width: 100% !important;
+
+    }
+    .payment-login-holder .payment-login {
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+    .navbar{
+        padding: 18px !important;
+    }
+    .home-entry .wrapper{
+        margin-top: 2.5%;
+        max-width: 100%;
+    }
+    .home-entry .search-area{
+        display: flex;
+        flex-direction: column;
+    }
+    .home-entry .search-area .search-control{
+        padding: 18px 0px;
+    }
+    .single-property-card {
+        display: flex;
+        flex-direction: column;
+    }
+    .single-property-card .cover-image{
+        height: 220px;
+        max-width: 100%;
+        min-width: 100%;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 4px;
+    }
+    .single-property-card .content{
+        padding: 4px;
+    }
+    .hidden-small{
+        display: none;
+    }
+    .home-entry .wrapper .intro{
+        font-size: 2.5rem;
+    }
+    .intro-dtl{
+        margin-top: 4px;
+    }
+    .kSHjTt{
+        display: none;
+    }
+    .fod-promise{
+        padding: 1rem;
+    }
+    .app-download .download-wrapper .btn-holder{
+        flex-direction: column-reverse;
+    }
+    .app-download .download-wrapper .btn-holder .img-mobile{
+        max-width: 100%;
+    }
+    .app-download .download-wrapper {
+        margin: 0;
+        border-radius: 0;
+    }
+    .contact-card{
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 768px) {
+    .switchable .container>.row {
+        flex-flow: row-reverse;
+    }
+}

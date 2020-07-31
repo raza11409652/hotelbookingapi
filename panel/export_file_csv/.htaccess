@@ -1,0 +1,4 @@
+<FilesMatch "\.(?i:csv)$">
+  Header set Content-Disposition attachment
+  Header set Content-Type text/csv
+</FilesMatch>
