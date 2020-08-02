@@ -12,6 +12,12 @@ class Bookings{
         $data = mysqli_fetch_array($res) ; 
         return $data['MAX_ID'] +1  ;
     }
+    function totalnumberdays($startDate , $endDate){
+        $strStart =strtotime($startDate)  ; 
+        $strEnd = strtotime($endDate) ; 
+        $diff  =($strEnd - $strStart) ; 
+        return abs(round($diff / 86400)); ; 
+    }
     function getBookingByID($id){
         $query = "SELECT * from booking where booking_id='{$id}'" ; 
         $res = mysqli_query($this->connection , $query) ; 
@@ -49,6 +55,30 @@ class Bookings{
         return  $bookingNo ; 
 
         
+    }
+    function getproperty($propertyID){
+        $query = "Select * from property where property_id='{$propertyID}' " ; 
+        $res = mysqli_query($this->connection , $query) ; 
+        @$data = mysqli_fetch_array($res) ; 
+       return $data ; 
+    }
+
+    function createNew($property , $user , $start ,$end){
+        $bookingId  =$this->getBookingId(); 
+        $bookingUid= $this->generateBookingUid($bookingId);
+        $numberDays  = $this->totalnumberdays($start , $end) ; 
+        if($numberDays<1){
+            $numberDays =1 ; 
+        }
+        $propertyData = $this->getproperty($property)  ;
+        $price = $propertyData['property_price'] ; 
+        $amount = $numberDays *$price ; 
+        $query= "insert into booking(booking_id , booking_number, booking_user , booking_property , booking_start_date , 
+        booking_end_date , booking_amount,booking_total_days )
+        VALUES('{$bookingId}' , '{$bookingUid}','{$user}','{$property}'  , '{$start}' , '{$end}' , '{$amount}','{$numberDays}') " ;
+        //echo $query;
+        $res = mysqli_query($this->connection , $query) ; 
+        return $res ; 
     }
     function totalbookingByProperty($property){
         $query = "Select * from booking where  booking_property='{$property}' order by booking_status" ; 
@@ -121,10 +151,8 @@ class Bookings{
      * @param $user is user ID
      */
     function getAllBookingForUser($user){
-        $query = "SELECT * from booking B , room R ,
-         property P , booking_status S WHERE  booking_user='{$user}' 
-         && booking_status='2' && B.booking_room =R.room_id 
-         && B.booking_property = P.property_id && B.booking_status=S.booking_status_id" ; 
+        $query = "SELECT * from booking WHERE  booking_user='{$user}' 
+         && booking_status='2' " ; 
         $res = mysqli_query($this->connection , $query);
         // echo $query;
         $records = array(); 
