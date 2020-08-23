@@ -1,5 +1,6 @@
 <?php
 require_once "../../base_config/Connection.php";
+require_once "../../base_config/SendOtpMsg91.php";
 require_once "../../panel/model/User.php";
 
 require_once "../../panel/model/Bookings.php";
@@ -47,6 +48,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $flag = $obj->create($property , $userId ,$start , $endDate) ; 
     if($flag){
+        $otp = mt_rand(100000 ,999999)  ;
+        sendotp($mobile ,$otp) ; 
         $response['error']  =false ; 
         $response['msg'] = "Booking has been scheduled for {$start} - {$endDate}" ; 
         echo json_encode($response) ; 
