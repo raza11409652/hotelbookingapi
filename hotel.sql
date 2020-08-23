@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 31, 2020 at 10:21 AM
+-- Generation Time: Aug 23, 2020 at 07:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fod`
+-- Database: `hotel`
 --
 
 -- --------------------------------------------------------
@@ -113,27 +113,24 @@ CREATE TABLE `booking` (
   `booking_start_date` date NOT NULL,
   `booking_end_date` date NOT NULL,
   `booking_total_days` int(11) NOT NULL,
-  `booking_status` int(11) DEFAULT 5,
+  `booking_status` int(11) DEFAULT 2,
   `booking_property` int(11) NOT NULL,
   `booked_by` int(11) DEFAULT NULL,
   `booked_by_admin` int(11) DEFAULT NULL,
   `booking_room` int(11) DEFAULT NULL,
   `booking_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `booking_room_unit` double(10,2) DEFAULT NULL
+  `booking_room_unit` double(10,2) DEFAULT NULL,
+  `booking_is_checked` smallint(6) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`booking_id`, `booking_booked_on`, `booking_user`, `booking_number`, `booking_time`, `booking_start_date`, `booking_end_date`, `booking_total_days`, `booking_status`, `booking_property`, `booked_by`, `booked_by_admin`, `booking_room`, `booking_amount`, `booking_room_unit`) VALUES
-(1, '2020-04-24', 9, '2020042400001', '2020-04-24 11:01:39', '2020-04-24', '2020-10-24', 183, 2, 5, 2, NULL, 33, '5000.00', NULL),
-(2, '2020-05-16', 11, '2020051600002', '2020-05-15 18:35:28', '2020-05-16', '2020-05-20', 4, 2, 5, 2, NULL, 34, '500.00', NULL),
-(3, '2020-05-20', 9, '2020052000003', '2020-05-19 23:50:19', '2020-05-20', '2020-11-30', 194, 2, 5, 2, NULL, 35, '5000.00', NULL),
-(4, '2020-06-22', 4, '2020062200004', '2020-06-21 21:37:57', '2020-06-24', '2020-10-22', 120, 2, 5, 2, NULL, 36, '7000.00', NULL),
-(5, '2020-07-08', 17, '2020070800005', '2020-07-07 21:26:50', '2020-07-08', '2022-07-08', 730, 2, 5, NULL, NULL, 37, '6000.00', NULL),
-(6, '2020-07-08', 2, '2020070800006', '2020-07-08 02:59:52', '2020-07-08', '2022-06-08', 700, 2, 5, NULL, NULL, 42, '6000.00', NULL),
-(7, '2020-07-13', 18, '2020071300007', '2020-07-13 04:03:58', '2020-07-13', '2021-07-13', 365, 2, 5, NULL, NULL, 38, '6000.00', NULL);
+INSERT INTO `booking` (`booking_id`, `booking_booked_on`, `booking_user`, `booking_number`, `booking_time`, `booking_start_date`, `booking_end_date`, `booking_total_days`, `booking_status`, `booking_property`, `booked_by`, `booked_by_admin`, `booking_room`, `booking_amount`, `booking_room_unit`, `booking_is_checked`) VALUES
+(1, '2020-08-23', 20, '2020082300001', '2020-08-23 17:19:45', '2020-08-24', '2020-08-25', 1, 2, 2, NULL, NULL, NULL, '200.00', NULL, 1),
+(2, '2020-08-23', 20, '2020082300002', '2020-08-23 17:26:58', '2020-08-25', '2020-08-27', 2, 2, 1, NULL, NULL, NULL, '1300.00', NULL, 0),
+(3, '2020-08-23', 19, '2020082300003', '2020-08-23 17:28:42', '2020-08-23', '2020-08-26', 3, 2, 1, NULL, NULL, NULL, '1950.00', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -724,11 +721,11 @@ CREATE TABLE `property` (
 --
 
 INSERT INTO `property` (`property_id`, `property_uid`, `property_name`, `property_lat`, `property_long`, `property_address`, `property_cover_image`, `property_type`, `property_total_room`, `property_listing_type`, `property_price`, `property_added_by`, `property_added_on`, `property_status`) VALUES
-(1, 'FOD20201', 'Test Hari ohm Apartment', '31.244447', '75.702245', 'Near Addiction Gym Law gate Jalandhar', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 1, 14, 1, '6500.00', 1, '2020-02-26 17:58:23', 1),
-(2, 'FOD20202', 'Test 2', '31.244447', '75.702245', 'Law gate', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 2, 2, 2, '2000.00', 1, '2020-02-26 19:36:54', 1),
-(3, 'FOD20203', 'Test Property', '31.244447', '75.702245', 'Law gate Jalandhar', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 1, 6, 2, '7000.00', 1, '2020-02-27 08:47:33', 1),
-(4, 'FOD20204', 'Test 3', '31.244447', '75.702245', 'Jalandhar', 'https://frntr-life-properties.oyorooms.com/living-india/propertiesServiceImages/1412/bba91d3b-0469-4785-b58d-28341025e41a.jpg', 1, 3, 1, '5000.00', 1, '2020-02-27 15:28:56', 1),
-(5, 'FOD20205', 'Hari Ohm Apartment', '31.264231', '75.678843', 'Near Red apple apartment law gate', 'https://images.oyoroomscdn.com/uploads/hotel_image/90050/large/ff1c88b7c1ee241d.jpg', 1, 14, 1, '6000.00', 1, '2020-03-26 11:36:06', 1);
+(1, 'FOD20201', 'Test Hari ohm Apartment', '31.244447', '75.702245', 'Near Addiction Gym Law gate Jalandhar', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 3, 14, 1, '650.00', 1, '2020-02-26 17:58:23', 1),
+(2, 'FOD20202', 'Test 2', '31.244447', '75.702245', 'Law gate', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 2, 2, 2, '200.00', 1, '2020-02-26 19:36:54', 1),
+(3, 'FOD20203', 'Test Property', '31.244447', '75.702245', 'Law gate Jalandhar', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 1, 6, 2, '700.00', 1, '2020-02-27 08:47:33', 1),
+(4, 'FOD20204', 'Test 3', '31.244447', '75.702245', 'Jalandhar', 'https://frntr-life-properties.oyorooms.com/living-india/propertiesServiceImages/1412/bba91d3b-0469-4785-b58d-28341025e41a.jpg', 1, 3, 1, '500.00', 1, '2020-02-27 15:28:56', 1),
+(5, 'FOD20205', 'Hari Ohm Apartment', '31.264231', '75.678843', 'Near Red apple apartment law gate', 'https://images.oyoroomscdn.com/uploads/hotel_image/90050/large/ff1c88b7c1ee241d.jpg', 2, 14, 1, '600.00', 1, '2020-03-26 11:36:06', 1);
 
 -- --------------------------------------------------------
 
@@ -771,8 +768,9 @@ CREATE TABLE `property_type` (
 --
 
 INSERT INTO `property_type` (`property_type_id`, `property_type_val`, `property_type_image`) VALUES
-(1, '1 BHK', NULL),
-(2, '2 BHK', NULL);
+(1, 'Premium', NULL),
+(2, 'Couple friendly', NULL),
+(3, 'Budget', NULL);
 
 -- --------------------------------------------------------
 
@@ -897,7 +895,9 @@ INSERT INTO `user` (`user_id`, `user_uid`, `user_phone`, `user_name`, `user_emai
 (12, 'bFhlM32da7WSZ92MjHjnDixA95V2', '9835555980', 'name', 'test1@fod.in', 'name', '2020-04-20 12:48:48', 2, 'https://firebasestorage.googleapis.com/v0/b/fodv2-be234.appspot.com/o/FOD_USER_DOCS%2Fdocuments%2Fstorage%2Femulated%2F0%2FAndroid%2Fdata%2Fcom.flatsondemand.fod.care%2Ffiles%2FPictures%2FIMG_20200422_165358_3192539495334719328.jpg?alt=media&token=4f99b41a-8438-4fea-bbef-86ba842ebf27', 1),
 (13, 'Sp4rxzHv3bOP4Q3rTQuTwmjlvfv1', '9876543210', 'kjsdfks', 'hackdroidbykhan@gmail.comd', 'ksdfs', '2020-05-11 23:24:18', NULL, NULL, 0),
 (17, 'tlzeuyYYpuTEIenZuCHjXryvqdD3', '9876543214', 'FOD USER', NULL, NULL, '2020-07-04 03:37:02', NULL, NULL, 0),
-(18, '3GiZcODLkBYatk7OHwHhmzBwNAF3', '9835555982', 'MD KHALID RAZA KHAN', NULL, 'Yusuf khan', '2020-07-08 06:14:21', NULL, 'https://firebasestorage.googleapis.com/v0/b/fodv2-be234.appspot.com/o/FOD_USER_DOCS%2Fdocuments%2Fstorage%2Femulated%2F0%2FAndroid%2Fdata%2Fcom.flatsondemand.fod.care%2Ffiles%2FPictures%2FIMG_20200716_164102_9073336102315679122.jpg?alt=media&token=4817d7f2-964f-46a9-9e43-91370db1f3f9', 1);
+(18, 'q79lV06AnJQa0BCgUtY47eXFEF92', '9835555982', 'MD KHALID RAZA KHAN', NULL, 'Yusuf khan', '2020-07-08 06:14:21', NULL, 'https://firebasestorage.googleapis.com/v0/b/fodv2-be234.appspot.com/o/FOD_USER_DOCS%2Fdocuments%2Fstorage%2Femulated%2F0%2FAndroid%2Fdata%2Fcom.flatsondemand.fod.care%2Ffiles%2FPictures%2FIMG_20200716_164102_9073336102315679122.jpg?alt=media&token=4817d7f2-964f-46a9-9e43-91370db1f3f9', 1),
+(19, '7GK5d1tzxyXE8aKS0Ai9VAKuEZ73', '9347203538', 'FOD USER', NULL, NULL, '2020-08-02 12:03:23', NULL, NULL, 0),
+(20, 'H5gaF4k76TaDxOrrL31CFROui022', '9815963210', 'FOD USER', NULL, NULL, '2020-08-23 17:17:38', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -979,6 +979,13 @@ CREATE TABLE `user_wishlist` (
   `user_wishlist_property` int(11) NOT NULL,
   `user_wishlist_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_wishlist`
+--
+
+INSERT INTO `user_wishlist` (`user_wishlist_id`, `user_wishlist_user`, `user_wishlist_property`, `user_wishlist_time`) VALUES
+(32, 18, 1, '2020-08-02 10:46:02');
 
 --
 -- Indexes for dumped tables
@@ -1428,7 +1435,7 @@ ALTER TABLE `property_image`
 -- AUTO_INCREMENT for table `property_type`
 --
 ALTER TABLE `property_type`
-  MODIFY `property_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `property_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `room`
@@ -1452,7 +1459,7 @@ ALTER TABLE `time_slot`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user_document`
@@ -1470,7 +1477,7 @@ ALTER TABLE `user_profile`
 -- AUTO_INCREMENT for table `user_wishlist`
 --
 ALTER TABLE `user_wishlist`
-  MODIFY `user_wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `user_wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
